@@ -8,6 +8,7 @@ public class Restaurante {
 
     // Atributos
     LinkedList<Mesa> mesas = new LinkedList<>();
+    LinkedList<Plato> platos = new LinkedList<>();
 
     public void registarMesa() {
         int numeroMesa;
@@ -27,6 +28,27 @@ public class Restaurante {
         System.out.println("Mesa creada correctamente");
     }
 
-    public void mostrarMesa() {}
+    public void registrarPlato() {
+        String codigoPlato; // P-01
+        String nombrePlato;
+        double precioPlato;
+
+        System.out.println("Ingresa un codigo de plato: ");
+        codigoPlato = sc.nextLine();
+        sc.nextLine();
+
+        System.out.println("Ingresa el nombre del plato: ");
+        nombrePlato = sc.nextLine();
+        sc.nextLine();
+
+        do {
+            System.out.println("Ingresa el precio del plato: ");
+            precioPlato = sc.nextDouble();
+        } while (precioPlato <= 0);
+
+        Plato plato = new Plato(codigoPlato, nombrePlato, precioPlato);
+        platos.add(plato);
+        System.out.println("Plato creada correctamente");
+    }
 
 }
