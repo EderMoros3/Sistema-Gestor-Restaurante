@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -50,5 +49,5 @@ public class Restaurante {
         platos.add(plato);
         System.out.println("Plato creada correctamente");
     }
-
+    
 }
