@@ -8,6 +8,7 @@ public class Restaurante {
     // Atributos
     LinkedList<Mesa> mesas = new LinkedList<>();
     LinkedList<Plato> platos = new LinkedList<>();
+    LinkedList<Pedido> pedidos = new LinkedList<>();
 
     public void registarMesa() {
         int numeroMesa;
@@ -34,11 +35,11 @@ public class Restaurante {
 
         System.out.println("Ingresa un codigo de plato: ");
         codigoPlato = sc.nextLine();
-        sc.nextLine();
+        sc.next();
 
         System.out.println("Ingresa el nombre del plato: ");
         nombrePlato = sc.nextLine();
-        sc.nextLine();
+        sc.next();
 
         do {
             System.out.println("Ingresa el precio del plato: ");
@@ -50,4 +51,49 @@ public class Restaurante {
         System.out.println("Plato creada correctamente");
     }
     
+    public void registrarPedido() {
+        Mesa mesaEncontrada = null;
+        int numeroMesa;
+
+        do {
+            System.out.println("Introduce el numero de una mesa existente: ");
+            numeroMesa = sc.nextInt();
+            for(Mesa mesa : this.mesas) {
+                if(numeroMesa == mesa.getNumero()) {
+                    mesaEncontrada = mesa;
+                    break;
+                }
+            }
+            if (mesaEncontrada == null) {
+                System.out.println("No se ha encontrado esa mesa");
+                
+            } 
+        } while (mesaEncontrada == null);
+
+        LinkedList<Plato> listaPlatosPedidos = new LinkedList<>();
+
+        boolean terminar = false;
+        String codigo;
+        while(!terminar) {
+            
+            System.out.println("Introduce el codigo de los platos: ");
+            System.out.println("Si se introduce un 0, parara de preguntar platos");
+            codigo = sc.next();
+
+            // Futuro fix, no sale del bucle si se introduce un 0
+            if (codigo.equals("0")) {
+                terminar = true;
+            } else {
+                for(Plato plato : this.platos) {
+                    if (codigo.equals(plato.getCodigo())) {
+                        listaPlatosPedidos.add(plato);
+                    }
+                }
+            }
+        }
+        Pedido pedido = new Pedido(mesaEncontrada, listaPlatosPedidos);
+        pedidos.add(pedido);
+        System.out.println("Pedido creado correctamente");
+
+    }
 }

@@ -20,6 +20,7 @@ public class Pedido {
     public void cambiarCompletado() { this.estaCompletado = !this.estaCompletado; } 
 
     private double calcularPrecioTotal() {
+        
         double precioTotal = 0;
         for (Plato plato : this.listaPlatos) {
             precioTotal += plato.getPrecio();
