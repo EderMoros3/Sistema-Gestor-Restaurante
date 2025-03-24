@@ -123,82 +123,6 @@ public class Restaurante {
         System.out.println("Pedido creado correctamente");
     }
 
-    public void modificarPedido(Pedido pedido) {
-        boolean terminar = false;
-        while (!terminar) {
-            System.out.println("1. Agregar plato");
-            System.out.println("2. Quitar plato");
-            System.out.println("3. Cambiar el numero de mesa");
-            System.out.println("4. Cambiar estado del pedido");
-            System.out.println("5. Aplicar descuento");
-            System.out.println("6. Finalizar modificacion");
-            int opcion = sc.nextInt();
-
-            switch (opcion) {
-                case 1 -> {
-                    System.out.println("Introduce el codigo del plato a agregar: ");
-                    String codigo = sc.nextLine();
-                    sc.next();
-                    for (Plato plato : this.platos) {
-                        if (codigo.equals(plato.getCodigo())) {
-                            pedido.listaPlatos.add(plato);
-                        }
-                    }
-                    System.out.println("Plato agregado correctamente");
-                }
-                
-                case 2 -> {
-                    System.out.println("Introduce el codigo del plato a quitar: ");
-                    String codigo = sc.nextLine();
-                    sc.next();
-                    for (Plato plato : this.platos) {
-                        if (codigo.equals(plato.getCodigo())) {
-                            pedido.listaPlatos.remove(plato);
-                        }
-                    }
-                    System.out.println("Plato quitado correctamente");
-                }
-
-                case 3 -> {
-                    Mesa mesaEncontrada = null;
-                    int numeroMesa;
-
-                    do {
-                        System.out.println("Introduce el numero de una mesa existente: ");
-                        numeroMesa = sc.nextInt();
-                        for(Mesa mesa : this.mesas) {
-                            if(numeroMesa == mesa.getNumero()) {
-                                mesaEncontrada = mesa;
-                                break;
-                            }
-                        }
-
-                        if (mesaEncontrada == null) {
-                            System.out.println("No se ha encontrado esa mesa");
-                        }
-                    } while (mesaEncontrada == null);
-                    System.out.println("Mesa cambiada correctamente");
-                }
-
-                case 4 -> {
-                    pedido.cambiarCompletado();
-                    System.out.println("Estado del pedido cambiado correctamente");
-                }
-
-                case 5 -> {
-                    System.out.println("Introduce el descuento a aplicar: ");
-                    Double descuento = sc.nextDouble(); 
-                    pedido.precioTotal = pedido.precioTotal * (100 - descuento) / 100;
-                    System.out.println("Descuento aplicado correctamente");
-                }
-                
-                case 6 -> {
-                    terminar = true;
-                }
-            }
-        }
-    }
-
     private Pedido getPedidoNumeroMesa() {
         if (!this.pedidos.isEmpty()) {
             do {
@@ -300,6 +224,11 @@ public class Restaurante {
             }
 
             case 4 -> pedido.setMesa(this.mesaByNumber());
+            case 5 -> pedido.aplicarDescuento(10);
+            case 6 -> {
+                this.pedidos.remove(pedido);
+                System.out.println("Pedido borrado correctamente");
+            }
         }
     }
 }
