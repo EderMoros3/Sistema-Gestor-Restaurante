@@ -1,3 +1,4 @@
+import java.util.LinkedList;
 import java.util.Scanner;
 public class App {
     public static void main(String[] args) throws Exception {
@@ -26,10 +27,12 @@ public class App {
                 case 4 -> restaurante.menuModificarPedido(); 
                 case 5 -> restaurante.menuModificarOBorrarPlato();
                 case 6 -> {
-                    //guardarDatos();
+                    LinkedList<Object>[] datos = restaurante.getDatos();
+                    Persistencia.guardarDatos(datos);
                 }
                 case 7 -> {
-                    //cargarDatos();
+                    LinkedList<?>[] datos = Persistencia.cargarDatos();
+                    restaurante.setDatos(datos);
                 }
                 case 8 -> {
                     System.out.println("Saliendo del sistema...");
