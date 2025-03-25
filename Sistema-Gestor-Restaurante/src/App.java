@@ -4,6 +4,7 @@ public class App {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
         Restaurante restaurante = new Restaurante();
+        restaurante.setDatos(Persistencia.cargarDatos());
         
         int opcion;
         
@@ -35,6 +36,7 @@ public class App {
                     restaurante.setDatos(datos);
                 }
                 case 8 -> {
+                    Persistencia.guardarDatos(restaurante.getDatos());
                     System.out.println("Saliendo del sistema...");
                 }
                 default -> {
